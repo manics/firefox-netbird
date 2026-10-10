@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+echo "[netbird] Starting NetBird daemon..."
+netbird service run > /var/log/netbird.log 2>&1 &
+sleep 1
+
+if [ -n "$NETBIRD_MANAGEMENT_URL" ]; then
+  echo "[netbird] Connecting to $NETBIRD_MANAGEMENT_URL..."
+  netbird up --setup-key "$NETBIRD_SETUP_KEY" --management-url "$NETBIRD_MANAGEMENT_URL"
+else
+  echo "[netbird] Connecting to NetBird..."
+  netbird up --setup-key "$NETBIRD_SETUP_KEY"
+fi

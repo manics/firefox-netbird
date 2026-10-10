@@ -1,16 +1,18 @@
-# GHCR Container Image Template
+# Firefox Netbird container
 
-[![Build](https://github.com/manics/ghcr-container-image-template/actions/workflows/build.yml/badge.svg)](https://github.com/manics/ghcr-container-image-template/actions/workflows/build.yml)
+[![Build](https://github.com/manics/firefox-netbird/actions/workflows/build.yml/badge.svg)](https://github.com/manics/firefox-netbird/actions/workflows/build.yml)
 
-A template repository for automatically building and pushing container (Docker) images to [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
+A Firefox container: https://hub.docker.com/r/jlesage/firefox (https://github.com/jlesage/docker-firefox) with the [Netbird](https://netbird.io/) client.
 
-To use this repository click `Use this template` and modify [`Dockerfile`](Dockerfile).
+Use this to connect to a website over Netbird without having to install Netbird on your own computer.
 
-[GitHub actions](.github/workflows/build.yml) will build every image for AMD64 and ARM64.
-- Every push to `main` is pushed to `ghcr.io/${{ github.repository }}:main`.
-- Tags are pushed to `ghcr.io/${{ github.repository }}:TAG`.
+## Usage
 
-## Licence
+```sh
+podman run --name firefox-netbird -it --rm --device /dev/net/tun:/dev/net/tun \
+  --cap-add=NET_ADMIN --privileged -p5800:5800 \
+  -e NETBIRD_SETUP_KEY=<netbird-setup-key> \
+  ghcr.io/manics/firefox-netbird
+```
 
-This repository uses the MIT No Attribution licence.
-Feel free to use and relicense as you wish.
+Pass `-e NETBIRD_MANAGEMENT_URL=<https://netbird-host.example.org>` if you are self-hosting Netbird.

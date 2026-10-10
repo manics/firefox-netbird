@@ -15,7 +15,7 @@ env:
 jobs:
   container:
     name: Container
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       packages: write
@@ -36,7 +36,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          flavor: latest=auto
+          flavor: latest=${{ github.ref == format('refs/heads/{0}', env.PUBLISH_BRANCH) }}
           images: ${{ env.REGISTRY }}/${{ env.OWNER_IMAGE }}
 
       - name: Set up QEMU
