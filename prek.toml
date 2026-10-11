@@ -1,0 +1,23 @@
+# https://prek.j178.dev/configuration/#choose-a-config-file
+
+[[repos]]
+# https://prek.j178.dev/0.5.5/reference/built-in-hooks/
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-added-large-files" },
+]
+
+[[repos]]
+repo = "https://github.com/rbubley/mirrors-prettier"
+rev = "v3.9.9"
+hooks = [{ id = "prettier" }]
+
+[[repos]]
+repo = "https://github.com/tombi-toml/tombi-pre-commit"
+rev = "v1.8.1"
+hooks = [
+  { id = "tombi-format", args = ["--offline"] },
+  { id = "tombi-lint", args = ["--offline"] },
+]

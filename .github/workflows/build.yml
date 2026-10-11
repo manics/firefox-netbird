@@ -1,7 +1,19 @@
 name: Build
 on:
   push:
+    paths-ignore:
+      - "**.md"
+      - .github/dependabot.yaml
+      - .github/workflows/lint.yml
+      - LICENSE
+      - prek.toml
   pull_request:
+    paths-ignore:
+      - "**.md"
+      - .github/dependabot.yaml
+      - .github/workflows/lint.yml
+      - LICENSE
+      - prek.toml
 
 env:
   REGISTRY: ghcr.io
